@@ -23,9 +23,5 @@ Cypress.on('uncaught:exception', () => {
 require('cypress-xpath')
 
 beforeEach(() => {
-  const VTEX_AUTH_COOKIE = Cypress.env('VTEX_AUTH_COOKIE')
-
-  if (VTEX_AUTH_COOKIE) {
-    cy.setCookie('VtexIdclientAutCookie', VTEX_AUTH_COOKIE)
-  }
+  cy.resetSession()
 })

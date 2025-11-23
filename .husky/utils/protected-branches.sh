@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 PROTECTED_BRANCHES="^(main|master|develop)"

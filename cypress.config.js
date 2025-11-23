@@ -19,6 +19,6 @@ module.exports = defineConfig({
       on('file:preprocessor', cucumber())
     },
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx,feature}',
-    baseUrl: 'https://qa-lite.vercel.app' || process.env.VTEX_WORKSPACE,
+    baseUrl: process.env.VTEX_WORKSPACE || 'https://qa-lite.vercel.app',
   },
 })
