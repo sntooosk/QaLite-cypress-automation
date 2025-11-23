@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress Test Suite
 
 on:
   push:
@@ -22,7 +22,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Lint project
+        run: npm run lint
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
           command: npm run cy:run
+          browser: chrome
+        env:
+          QA_LITE_BASE_URL: ${{ secrets.QA_LITE_BASE_URL }}
+          QA_LITE_AUTH_COOKIE: ${{ secrets.QA_LITE_AUTH_COOKIE }}

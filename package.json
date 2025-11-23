@@ -1,7 +1,7 @@
 {
-  "name": "cypress-template",
-  "version": "0.0.0",
-  "description": "",
+  "name": "qalite-cypress-automation",
+  "version": "1.0.0",
+  "description": "Cypress and Cucumber automation suite for QA Lite.",
   "scripts": {
     "postinstall": "husky",
     "commit": "cz",
@@ -13,12 +13,12 @@
     "cy:open:mobile": "cypress open -c viewportWidth=375,viewportHeight=667 --env environment=mobile",
     "bs:run:desktop": "dotenv -- browserstack-cypress run -c viewportWidth=1921,viewportHeight=1081 --env environment=desktop",
     "bs:run:mobile": "dotenv -- browserstack-cypress run -c viewportWidth=375,viewportHeight=667 --env environment=mobile",
-    "bs:regressive:desktop": "npm run bs:run:desktop -- -b \"Pokemon - Regressive Test Desktop\"",
-    "bs:regressive:mobile": "npm run bs:run:mobile -- -b \"Pokemon - Regressive Test Mobile\"",
-    "bs:smoke:desktop": "npm run bs:run:desktop -- --spec cypress/e2e/features/OrderTest.feature -b \"Pokemon - Smoke Test Desktop\"",
-    "bs:smoke:mobile": "npm run bs:run:mobile -- --spec cypress/e2e/features/OrderTest.feature -b \"Pokemon - Smoke Test Mobile\"",
-    "bs:spec:desktop": "npm run bs:run:desktop -- --spec cypress/e2e/features/PdpTest.feature -b \"Pokemon - Spec Test Desktop\"",
-    "bs:spec:mobile": "npm run bs:run:mobile -- --spec cypress/e2e/features/PdpTest.feature -b \"Pokemon - Spec Test Mobile\""
+    "bs:regression:desktop": "npm run bs:run:desktop -- -b \"QA Lite - Regression Test Desktop\"",
+    "bs:regression:mobile": "npm run bs:run:mobile -- -b \"QA Lite - Regression Test Mobile\"",
+    "bs:smoke:desktop": "npm run bs:run:desktop -- --spec cypress/e2e/features/OrderTest.feature -b \"QA Lite - Smoke Test Desktop\"",
+    "bs:smoke:mobile": "npm run bs:run:mobile -- --spec cypress/e2e/features/OrderTest.feature -b \"QA Lite - Smoke Test Mobile\"",
+    "bs:spec:desktop": "npm run bs:run:desktop -- --spec cypress/e2e/features/PdpTest.feature -b \"QA Lite - Spec Test Desktop\"",
+    "bs:spec:mobile": "npm run bs:run:mobile -- --spec cypress/e2e/features/PdpTest.feature -b \"QA Lite - Spec Test Mobile\""
   },
   "keywords": [
     "cypress",

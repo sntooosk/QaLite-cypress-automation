@@ -1,38 +1,39 @@
-const el = require('./elements').ELEMENTS
+import BasePage from '../BasePage'
+import { ELEMENTS as loginElements } from './elements'
 
-class LoginPage {
-  accessLoginPage() {
-    cy.visit('/')
+class LoginPage extends BasePage {
+  open() {
+    this.visit('/')
   }
 
   typeEmail(email) {
-    this.typeIntoField(el.inputEmail, email)
+    this.typeText(loginElements.emailField, email)
   }
 
   typePassword(password) {
-    this.typeIntoField(el.inputPassword, password)
+    this.typeText(loginElements.passwordField, password)
   }
 
-  submitForm() {
-    cy.get(el.buttonSubmit).click()
+  submit() {
+    this.click(loginElements.submitButton)
   }
 
   fillCredentials({ email, password }) {
-    if (email) this.typeEmail(email)
-    if (password) this.typePassword(password)
+    if (email) {
+      this.typeEmail(email)
+    }
+
+    if (password) {
+      this.typePassword(password)
+    }
   }
 
-  validateSuccess() {
-    cy.url().should('contain', '/admin')
+  expectSuccessfulLogin() {
+    this.expectUrlToInclude('/admin')
   }
 
-  validateMessage(message) {
-    cy.get(el.alertMessage).should('contain', message)
-  }
-
-  typeIntoField(selector, value) {
-    cy.get(selector).clear()
-    cy.get(selector).type(value)
+  expectFeedbackMessage(message) {
+    this.shouldContainText(loginElements.feedbackMessage, message)
   }
 }
 

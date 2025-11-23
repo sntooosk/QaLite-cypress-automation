@@ -1,14 +1,14 @@
-Feature: Organization
+Feature: Organization management
 
   Background:
-    Given I am on the Organization page
+    Given the user is on the organization page
 
-  Scenario: Create new organization
-    When I click the new organization button
-    And I type the organization name "Test Organization"
-    Then I save the organization
+  Scenario: Create a new organization
+    When the user starts creating a new organization
+    And the user enters the organization name "Test Organization"
+    Then the user saves the organization
 
-  Scenario: Delete organization
-    When I click the saved organization card
-    And I open the manage organization menu
-    Then I delete the organization
+  Scenario: Delete an existing organization
+    When the user selects the saved organization card
+    And the user opens the organization management menu
+    Then the user deletes the organization

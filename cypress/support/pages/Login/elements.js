@@ -1,6 +1,6 @@
 export const ELEMENTS = {
-  inputEmail: '[data-testid="login-email"]',
-  inputPassword: '[data-testid="login-password"]',
-  buttonSubmit: '[data-testid="login-submit"]',
-  alertMessage: '.form-message',
+  emailField: '[data-testid="login-email"]',
+  passwordField: '[data-testid="login-password"]',
+  submitButton: '[data-testid="login-submit"]',
+  feedbackMessage: '.form-message',
 }

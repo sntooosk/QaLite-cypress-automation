@@ -2,14 +2,14 @@
 Feature: Login
 
   Background:
-    Given I am on the login page
+    Given the user is on the login page
 
   Scenario: Login with default credentials
-    When I log in with the default credentials
-    Then the login should be successful
+    When the user logs in with the default credentials
+    Then the user should be logged in
 
-  Scenario: Login with incorrect password
-    When the user enters the email "juliano.cassimiro@qualitydigital.global"
-    And the user enters the password "senha_errada"
-    And the user submits the form
-    Then the message "E-mail ou senha incorretos. Confira os dados informados." should be displayed
+  Scenario: Login with an incorrect password
+    When the user provides the email "juliano.cassimiro@qualitydigital.global"
+    And the user provides the password "invalid_password"
+    And the user submits the login form
+    Then the login feedback message "E-mail ou senha incorretos. Confira os dados informados." is shown

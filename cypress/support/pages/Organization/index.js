@@ -1,74 +1,68 @@
-import { ELEMENTS as el } from './elements'
+import BasePage from '../BasePage'
+import { ELEMENTS as organizationElements } from './elements'
 
-class OrganizationPage {
+class OrganizationPage extends BasePage {
   constructor() {
-    this.lastOrganizationName = ''
+    super()
+    this.createdOrganizationName = ''
   }
 
-  accessOrganizationPage() {
-    cy.visit('/admin')
+  open() {
+    this.visit('/admin')
   }
 
-  clickNewOrganizationButton() {
-    this.click(el.buttonNewOrg)
+  startNewOrganization() {
+    this.click(organizationElements.newOrganizationButton)
   }
 
-  clickButtonGerenciar() {
-    this.click(el.buttonGerenciarOrg)
-  }
-
-  clickButtonApagarOrg() {
-    this.click(el.buttonApagarOrg)
-  }
-
-  typeNewOrganization(name) {
-    this.lastOrganizationName = name
-    this.fillField(el.inputNewOrg, name)
+  enterOrganizationName(name) {
+    this.createdOrganizationName = name
+    this.typeText(organizationElements.organizationNameInput, name)
   }
 
   saveOrganization() {
-    this.click(el.buttonSaveOrg)
+    this.click(organizationElements.saveOrganizationButton)
   }
 
-  storeCreatedOrganizationId() {
-    const organizationName = this.lastOrganizationName
+  openManagementMenu() {
+    this.click(organizationElements.manageOrganizationButton)
+  }
 
-    if (!organizationName) {
-      throw new Error('No organization name was provided before saving')
+  deleteOrganization() {
+    this.click(organizationElements.deleteOrganizationButton)
+  }
+
+  rememberCreatedOrganizationId() {
+    if (!this.createdOrganizationName) {
+      throw new Error('Organization name must be provided before saving it.')
     }
 
-    cy.contains(el.cardOrgPrefix, organizationName)
+    cy.contains(
+      organizationElements.organizationCardPrefix,
+      this.createdOrganizationName,
+    )
       .invoke('attr', 'data-testid')
-      .then((value) => {
-        const id = value?.replace('organization-card-', '')
+      .then((idValue) => {
+        const organizationId = idValue?.replace('organization-card-', '')
 
-        if (!id) {
-          throw new Error(
-            'Failed to capture the ID of the created organization',
-          )
+        if (!organizationId) {
+          throw new Error('Unable to capture the created organization ID.')
         }
 
-        Cypress.env('orgId', id)
+        Cypress.env('organizationId', organizationId)
       })
   }
 
-  clickSavedOrganizationCard() {
-    const id = Cypress.env('orgId')
+  selectSavedOrganization() {
+    const organizationId = Cypress.env('organizationId')
 
-    if (!id) {
-      throw new Error('Organization ID was not saved previously')
+    if (!organizationId) {
+      throw new Error(
+        'No organization ID was cached. Create an organization before selecting it.',
+      )
     }
 
-    cy.get(el.cardOrg(id)).click()
-  }
-
-  click(selector) {
-    cy.get(selector).click()
-  }
-
-  fillField(selector, value) {
-    cy.get(selector).clear()
-    cy.get(selector).type(value)
+    this.click(organizationElements.organizationCard(organizationId))
   }
 }
 
