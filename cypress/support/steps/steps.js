@@ -1,6 +1,17 @@
-import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
+import { Before, Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
 import Login from '../pages/Login'
 import Organization from '../pages/Organization'
+
+Before({ tags: '@logout' }, () => {
+  cy.window().then((win) => {
+    win.indexedDB.databases().then((dbs) => {
+      dbs.forEach((db) => win.indexedDB.deleteDatabase(db.name))
+    })
+  })
+
+  cy.clearLocalStorage()
+  cy.clearCookies()
+})
 
 Given('I am on the login page', () => {
   Login.accessLoginPage()

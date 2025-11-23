@@ -21,14 +21,3 @@ Cypress.on('uncaught:exception', () => {
   return false
 })
 require('cypress-xpath')
-
-beforeEach(() => {
-  cy.window().then((win) => {
-    win.indexedDB.databases().then((dbs) => {
-      dbs.forEach((db) => win.indexedDB.deleteDatabase(db.name))
-    })
-  })
-
-  cy.clearLocalStorage()
-  cy.clearCookies()
-})
