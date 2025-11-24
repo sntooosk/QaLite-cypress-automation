@@ -1,6 +1,10 @@
 import LoginPage from './pages/Login'
 import users from '../fixtures/users.json'
 
+// Bump SESSION_VERSION whenever the login flow or validation changes to avoid
+// Cypress cache collisions with outdated session setups.
+const SESSION_VERSION = 'v2'
+
 Cypress.Commands.add(
   'login',
   (email = users.email, password = users.password) => {
@@ -12,7 +16,7 @@ Cypress.Commands.add(
     }
 
     cy.session(
-      ['firebase:authUser', email],
+      ['firebase:authUser', email, SESSION_VERSION],
       () => {
         performLogin()
       },
