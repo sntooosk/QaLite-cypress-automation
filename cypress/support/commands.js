@@ -14,14 +14,7 @@ Cypress.Commands.add(
     cy.session(
       ['firebase:authUser', email],
       () => {
-        cy.getCookie('firebase:authUser').then((authCookie) => {
-          if (authCookie) {
-            cy.log('Reusing firebase auth cookie in saved session')
-            return
-          }
-
-          performLogin()
-        })
+        performLogin()
       },
       {
         validate() {
@@ -32,6 +25,14 @@ Cypress.Commands.add(
     )
 
     cy.visit('/admin')
-    LoginPage.expectSuccessfulLogin()
+
+    cy.url().then((currentUrl) => {
+      if (currentUrl.includes('/login')) {
+        performLogin()
+        return
+      }
+
+      LoginPage.expectSuccessfulLogin()
+    })
   },
 )
