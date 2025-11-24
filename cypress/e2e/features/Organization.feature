@@ -2,6 +2,7 @@ Feature: Organization management
 
   Background:
     Given the user logs in with the default credentials
+    And the user is on the organization page
 
   Scenario: Create a new organization
     When the user starts creating a new organization

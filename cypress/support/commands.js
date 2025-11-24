@@ -35,16 +35,3 @@ Cypress.Commands.add(
     LoginPage.expectSuccessfulLogin()
   },
 )
-
-Cypress.Commands.add('logout', () => {
-  cy.window().then((win) => {
-    win.indexedDB
-      ?.databases?.()
-      .then((dbs) =>
-        dbs.forEach((db) => db?.name && win.indexedDB.deleteDatabase(db.name)),
-      )
-  })
-
-  cy.clearLocalStorage()
-  cy.clearCookies()
-})

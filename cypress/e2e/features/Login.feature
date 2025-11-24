@@ -1,4 +1,3 @@
-@logout
 Feature: Login
 
   Background:

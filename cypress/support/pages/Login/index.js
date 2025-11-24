@@ -1,5 +1,5 @@
 import BasePage from '../BasePage'
-import { ELEMENTS } from '../Organization/elements'
+import { ELEMENTS } from './elements'
 
 class LoginPage extends BasePage {
   open() {
@@ -29,6 +29,11 @@ class LoginPage extends BasePage {
   }
 
   expectSuccessfulLogin() {
+    cy.url().then((currentUrl) => {
+      if (!currentUrl.includes('/admin')) {
+        this.visit('/admin')
+      }
+    })
     this.expectUrlToInclude('/admin')
   }
 

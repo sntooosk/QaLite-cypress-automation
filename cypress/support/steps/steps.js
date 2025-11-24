@@ -1,4 +1,4 @@
-import { Before, Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
+import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
 import LoginPage from '../pages/Login'
 import OrganizationPage from '../pages/Organization'
 import ProfilePage from '../pages/Profile'
@@ -21,10 +21,6 @@ const invalidEmailFaker = faker.internet.email(
 const invalidPasswordFaker = faker.internet.password(16)
 
 /*-------------------------------------------*/
-
-Before({ tags: '@logout' }, () => {
-  cy.logout()
-})
 
 /*--------------- Navigation ----------------*/
 
