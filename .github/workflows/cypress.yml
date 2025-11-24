@@ -28,7 +28,7 @@ on:
     branches: [ main ]
 
   repository_dispatch:
-    types: [run-cypress-tests]
+    types: [qalite-cypress-trigger]
 
 jobs:
 
