@@ -6,7 +6,7 @@ export const ELEMENTS = {
   saveOrganizationButton: '[data-testid="save-organization-button"]',
   manageOrganizationButton: '[data-testid="manage-organization-button"]',
   deleteOrganizationButton: '[data-testid="delete-organization-button"]',
-  confirmDeleteButton: '[data-testid="confirm-delete-button"]',
   organizationCard: (id) => `[data-testid="organization-card-${id}"]`,
   organizationCardPrefix: '[data-testid^="organization-card-"]',
+  newStoreOrganization: '[data-testid="new-store-button"]',
 }

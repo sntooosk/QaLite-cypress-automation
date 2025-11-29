@@ -1,7 +1,7 @@
 Feature: Organization management
 
   Background:
-    Given the user logs in with the default credentials
+    Given the user admin logs in with the default credentials
     And the user is on the organization page
 
   Scenario: Create a new organization
@@ -21,4 +21,5 @@ Feature: Organization management
     When the user selects the saved organization card
     And the user opens the organization management menu
     Then the user deletes the organization
+    And the modal confirm delete is displayed
     And the toast message "Organização removida com sucesso." is displayed

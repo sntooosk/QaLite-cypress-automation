@@ -1,20 +1,36 @@
+/* eslint-disable no-unused-vars */
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
 import LoginPage from '../pages/Login'
 import OrganizationPage from '../pages/Organization'
 import ProfilePage from '../pages/Profile'
-import {
-  randomCompanyName,
-  randomEmail,
-  randomLastName,
-  randomPassword,
-} from '../utils/generators'
+import StorePage from '../pages/Loja'
 import Toast from '../pages/components/Toast'
+import ModalConfirmDelete from '../pages/components/ModalConfirmDelete'
 
-const lastNameFaker = randomLastName()
-const companyFaker = randomCompanyName()
-const invalidEmailFaker = randomEmail('qualitydigital.global')
-const invalidPasswordFaker = randomPassword(16)
+/*----------------------------------------------------------------------------------*/
+/* FAKER */
+const faker = require('faker-br')
 
+/* Personal */
+const firstNameFaker = faker.name.firstName()
+const lastNameFaker = faker.name.lastName()
+const fullNameFaker = `${firstNameFaker} ${lastNameFaker}`
+const correctEmailFaker = faker.internet.email(firstNameFaker, lastNameFaker)
+const invalidEmailFaker = faker.internet.email(
+  firstNameFaker,
+  lastNameFaker,
+  'invalidprovider',
+)
+const passwordFaker = faker.internet.password(16)
+
+/* Company */
+const OrganizationFaker = faker.company.companyName()
+
+/* Store */
+const StoreFaker = faker.company.companyName()
+const StoreUrlFaker = faker.internet.url()
+
+/*----------------------------------------------------------------------------------*/
 /*--------------- Navigation ----------------*/
 
 Given('the user is on the login page', () => {
@@ -32,15 +48,19 @@ When('the user provides the email fake', () => {
 })
 
 When('the user provides the password fake', () => {
-  LoginPage.typePassword(invalidPasswordFaker)
+  LoginPage.typePassword(passwordFaker)
 })
 
 When('the user submits the login form', () => {
   LoginPage.submit()
 })
 
+When('the user admin logs in with the default credentials', () => {
+  cy.loginAsAdmin()
+})
+
 When('the user logs in with the default credentials', () => {
-  cy.login()
+  cy.loginAsUser()
 })
 
 Then('the user should be logged in', () => {
@@ -54,11 +74,11 @@ When('the user starts creating a new organization', () => {
 })
 
 When('the user enters the organization name fake', () => {
-  OrganizationPage.enterOrganizationName(companyFaker)
+  OrganizationPage.enterOrganizationName(OrganizationFaker)
 })
 
 When('the user enters the organization new name fake', () => {
-  OrganizationPage.enterOrganizationNameSettings(companyFaker)
+  OrganizationPage.enterOrganizationNameSettings(OrganizationFaker)
 })
 
 Then('the user saves the organization', () => {
@@ -80,13 +100,19 @@ When('the user opens the organization management menu', () => {
 
 Then('the user deletes the organization', () => {
   OrganizationPage.deleteOrganization()
-  OrganizationPage.confirmOrganization()
 })
+
+/*------------------- Toast -------------------*/
 
 When('the toast message {string} is displayed', (message) => {
   Toast.confirmMessage(message)
 })
 
+/*------------------- Toast -------------------*/
+
+When('the modal confirm delete is displayed', () => {
+  ModalConfirmDelete.confirmMessage()
+})
 /*------------------- Profile -------------------*/
 
 When('the user visits the profile page', () => {
@@ -103,4 +129,40 @@ Then('the user updates the profile', () => {
 
 When('the user name Header last name fake', () => {
   ProfilePage.expectNameHeader(lastNameFaker)
+})
+
+/*------------------- Loja -------------------*/
+
+When('the user starts creating a new store', () => {
+  OrganizationPage.startNewStore()
+})
+
+When('the user enters the store dados faker', () => {
+  StorePage.enterStoreName(StoreFaker)
+  StorePage.enterStoreUrl(StoreUrlFaker)
+})
+
+Then('the user saves the store', () => {
+  StorePage.saveStore()
+  StorePage.rememberCreatedStoreId()
+})
+
+When('the user selects the saved store card', () => {
+  StorePage.selectSavedStore()
+})
+
+When('the user opens the store management menu', () => {
+  StorePage.openStoreMenu()
+})
+
+When('the user enters the store new name fake', () => {
+  StorePage.enterStoreNameSettings(OrganizationFaker)
+})
+
+Then('the user updates the store', () => {
+  StorePage.updateStore()
+})
+
+Then('the user deletes the store', () => {
+  StorePage.deleteStore()
 })

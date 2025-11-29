@@ -29,7 +29,9 @@ class LoginPage extends BasePage {
   }
 
   expectSuccessfulLogin() {
-    cy.url().should('include', '/admin')
+    cy.url().should(($url) => {
+      expect($url.includes('/admin') || $url.includes('/dashboard')).to.be.true
+    })
   }
 }
 

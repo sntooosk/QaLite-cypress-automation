@@ -1,12 +1,18 @@
 import LoginPage from './pages/Login'
-import users from '../fixtures/users.json'
 
-Cypress.Commands.add(
-  'login',
-  (email = users.email, password = users.password) => {
-    LoginPage.open()
-    LoginPage.fillCredentials({ email, password })
-    LoginPage.submit()
-    LoginPage.expectSuccessfulLogin()
-  },
-)
+const admin = Cypress.env('admin')
+const user = Cypress.env('user')
+
+Cypress.Commands.add('loginAsAdmin', () => {
+  LoginPage.open()
+  LoginPage.fillCredentials(admin)
+  LoginPage.submit()
+  LoginPage.expectSuccessfulLogin()
+})
+
+Cypress.Commands.add('loginAsUser', () => {
+  LoginPage.open()
+  LoginPage.fillCredentials(user)
+  LoginPage.submit()
+  LoginPage.expectSuccessfulLogin()
+})

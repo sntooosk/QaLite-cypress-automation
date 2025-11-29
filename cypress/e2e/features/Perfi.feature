@@ -1,7 +1,7 @@
 Feature: Profile
 
   Background:
-    Given the user logs in with the default credentials
+    Given the user admin logs in with the default credentials
 
   Scenario: Update Profile
     When the user visits the profile page

@@ -1,6 +1,8 @@
 import BasePage from '../BasePage'
 import { ELEMENTS } from './elements'
 
+import organization from '../../../fixtures/organization.json'
+
 class OrganizationPage extends BasePage {
   constructor() {
     super()
@@ -13,6 +15,9 @@ class OrganizationPage extends BasePage {
 
   startNewOrganization() {
     this.click(ELEMENTS.newOrganizationButton)
+  }
+  startNewStore() {
+    this.click(ELEMENTS.newStoreOrganization)
   }
 
   enterOrganizationName(name) {
@@ -38,9 +43,6 @@ class OrganizationPage extends BasePage {
   deleteOrganization() {
     this.click(ELEMENTS.deleteOrganizationButton)
   }
-  confirmOrganization() {
-    this.click(ELEMENTS.confirmDeleteButton)
-  }
 
   rememberCreatedOrganizationId() {
     if (!this.createdOrganizationName) {
@@ -64,12 +66,10 @@ class OrganizationPage extends BasePage {
     const organizationId = Cypress.env('organizationId')
 
     if (!organizationId) {
-      throw new Error(
-        'No organization ID was cached. Create an organization before selecting it.',
-      )
+      this.click(ELEMENTS.organizationCard(organization.id))
+    } else {
+      this.click(ELEMENTS.organizationCard(organizationId))
     }
-
-    this.click(ELEMENTS.organizationCard(organizationId))
   }
 }
 
