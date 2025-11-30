@@ -12,20 +12,25 @@ class StorePage extends BasePage {
     this.createdStoreName = name
     this.typeText(ELEMENTS.storeNameInput, name)
   }
+
   enterStoreUrl(url) {
     this.createdStoreUrl = url
     this.typeText(ELEMENTS.storeUrlInput, url)
   }
+
   enterStoreNameSettings(name) {
-    this.createdStoreNameName = name
+    this.createdStoreName = name
     this.typeText(ELEMENTS.storeNewNameInput, name)
   }
+
   updateStore() {
     this.click(ELEMENTS.buttonUpdateStore)
   }
+
   deleteStore() {
     this.click(ELEMENTS.deleteStoreButton)
   }
+
   saveStore() {
     this.click(ELEMENTS.saveStoreButton)
   }
@@ -33,6 +38,7 @@ class StorePage extends BasePage {
   openStoreMenu() {
     this.click(ELEMENTS.manageStoreButton)
   }
+
   rememberCreatedStoreId() {
     if (!this.createdStoreName) {
       throw new Error('Store name must be provided before saving it.')

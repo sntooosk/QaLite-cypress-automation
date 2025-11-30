@@ -6,12 +6,11 @@ import ProfilePage from '../pages/Profile'
 import StorePage from '../pages/Loja'
 import Toast from '../pages/components/Toast'
 import ModalConfirmDelete from '../pages/components/ModalConfirmDelete'
+const faker = require('faker-br')
 
 /*----------------------------------------------------------------------------------*/
 /* FAKER */
-const faker = require('faker-br')
 
-/* Personal */
 const firstNameFaker = faker.name.firstName()
 const lastNameFaker = faker.name.lastName()
 const fullNameFaker = `${firstNameFaker} ${lastNameFaker}`
@@ -23,15 +22,12 @@ const invalidEmailFaker = faker.internet.email(
 )
 const passwordFaker = faker.internet.password(16)
 
-/* Company */
 const OrganizationFaker = faker.company.companyName()
-
-/* Store */
 const StoreFaker = faker.company.companyName()
 const StoreUrlFaker = faker.internet.url()
 
 /*----------------------------------------------------------------------------------*/
-/*--------------- Navigation ----------------*/
+/* Navigation */
 
 Given('the user is on the login page', () => {
   LoginPage.open()
@@ -41,7 +37,7 @@ Given('the user is on the organization page', () => {
   OrganizationPage.open()
 })
 
-/*------------------- Login -------------------*/
+/* Login */
 
 When('the user provides the email fake', () => {
   LoginPage.typeEmail(invalidEmailFaker)
@@ -67,7 +63,7 @@ Then('the user should be logged in', () => {
   LoginPage.expectSuccessfulLogin()
 })
 
-/*-------------- Organization ----------------*/
+/* Organization */
 
 When('the user starts creating a new organization', () => {
   OrganizationPage.startNewOrganization()
@@ -102,18 +98,19 @@ Then('the user deletes the organization', () => {
   OrganizationPage.deleteOrganization()
 })
 
-/*------------------- Toast -------------------*/
+/* Toast */
 
 When('the toast message {string} is displayed', (message) => {
   Toast.confirmMessage(message)
 })
 
-/*------------------- Toast -------------------*/
+/* Modal */
 
 When('the modal confirm delete is displayed', () => {
   ModalConfirmDelete.confirmMessage()
 })
-/*------------------- Profile -------------------*/
+
+/* Profile */
 
 When('the user visits the profile page', () => {
   ProfilePage.open()
@@ -131,7 +128,7 @@ When('the user name Header last name fake', () => {
   ProfilePage.expectNameHeader(lastNameFaker)
 })
 
-/*------------------- Loja -------------------*/
+/* Store */
 
 When('the user starts creating a new store', () => {
   OrganizationPage.startNewStore()
