@@ -1,47 +1,84 @@
-# Gitignore file for a Cypress project with Cucumber and BrowserStack CI
-# Ignoring commonly generated files and directories
-
-# Ignore node_modules directory as it contains dependencies
+# ------------------------------
+# Node / General
+# ------------------------------
 node_modules/
-
-# Ignore log directory and local log files
-log/
-local.log
-
-# Ignore system files created by macOS
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnp.*
+.pnpm-debug.log*
 .DS_Store
+Thumbs.db
 
-# Ignore Cypress generated files and directories
-cypress/results/*
-cypress/reports/*
-cypress/screenshots/*
-cypress/videos/*
+# ------------------------------
+# Environment Files
+# ------------------------------
+# Keep only the example
+cypress.env.json
+.env
+.env.local
+.env.*.local
 
-# Ignore Allure report directories and results
-allure-report/*
-allure-results/*
+# DO NOT IGNORE
+!cypress.env.example.json
 
-# Ignore results directory
+# ------------------------------
+# Cypress Artifacts
+# ------------------------------
+cypress/screenshots/
+cypress/videos/
+cypress/results/
+cypress/reports/
+cypress/downloads/
+cypress/logs/
+cypress/output/
+
+# ------------------------------
+# Allure
+# ------------------------------
+allure-results/
+allure-report/
+allure-history/
+
+# ------------------------------
+# Logs / Temp
+# ------------------------------
+log/
+logs/
+*.log
+local.log
+debug.log
 results/
+tmp/
+temp/
 
-# Ignore downloads directory
-downloads/
+# ------------------------------
+# Cucumber
+# ------------------------------
+cucumber-json/
+*.cucumber
 
-# Ignore Cucumber JSON report
-cucumber-json
-
-# Ignore build artifacts directory
+# ------------------------------
+# Build / Cache
+# ------------------------------
+build/
+dist/
 build_artifacts/
+.cache/
+coverage/
 
-# Ignore npm debug log file
-npm_install_debug.log
-
-# Ignore BrowserStack packages tarball and temporary directories
+# ------------------------------
+# BrowserStack
+# ------------------------------
 bstackPackages.tar.gz
 tmpBstackPackages
+browserstack-reports/
 
-# Ignore test archives
+# ------------------------------
+# Archives
+# ------------------------------
+*.zip
 tests.zip
-
-# Ignore environment variables file
-.env
+*.tar
+*.tar.gz

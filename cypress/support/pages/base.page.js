@@ -8,7 +8,7 @@ class BasePage {
   }
 
   click(selector, options = {}) {
-    this.getElement(selector).should('be.visible').click(options)
+    this.getElement(selector).click(options)
   }
 
   typeText(selector, value) {
@@ -36,7 +36,6 @@ class BasePage {
 
     this.contains(selector, name)
       .should('have.attr', 'data-testid')
-      .invoke('attr', 'data-testid')
       .then((idValue) => {
         const normalizedId = idValue?.replace(prefix, '')
 

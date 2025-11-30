@@ -1,14 +1,12 @@
-name: Cypress Tests
+name: CI
 
 on:
   pull_request:
     branches: [main]
-  repository_dispatch:
-    types: [qalite-cypress-trigger]
   workflow_dispatch:
 
 jobs:
-  cypress:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +14,4 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - name: Run Cypress
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
+      - run: npm run lint
