@@ -1,12 +1,12 @@
-export const ELEMENTS = {
+export const organizationSelectors = {
   newOrganizationButton: '[data-testid="new-organization-button"]',
   organizationNameInput: '[data-testid="organization-name-input"]',
   organizationNameSettingsInput: '[data-testid="organization-settings-name"]',
-  updateOrganizationButton: '[data-testid="save-organization-settings"]',
   saveOrganizationButton: '[data-testid="save-organization-button"]',
+  updateOrganizationButton: '[data-testid="save-organization-settings"]',
   manageOrganizationButton: '[data-testid="manage-organization-button"]',
   deleteOrganizationButton: '[data-testid="delete-organization-button"]',
-  organizationCard: (id) => `[data-testid="organization-card-${id}"]`,
   organizationCardPrefix: '[data-testid^="organization-card-"]',
-  newStoreOrganization: '[data-testid="new-store-button"]',
+  organizationCard: (id) => `[data-testid="organization-card-${id}"]`,
+  newStoreButton: '[data-testid="new-store-button"]',
 }

@@ -1,7 +1,5 @@
-export const ELEMENTS = {
+export const profileSelectors = {
   lastNameInput: '#lastName',
   updateButton: '.profile-editor > .button',
-  HEADER: {
-    userName: '.user-name',
-  },
+  headerUserName: '.user-name',
 }

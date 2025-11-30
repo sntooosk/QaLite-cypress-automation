@@ -22,5 +22,5 @@ Feature: Store management
     When the user selects the saved store card
     And the user opens the store management menu
     Then the user deletes the store
-    Then the modal confirm delete is displayed
+    And the modal confirm delete is displayed
     And the toast message "Loja removida com sucesso." is displayed

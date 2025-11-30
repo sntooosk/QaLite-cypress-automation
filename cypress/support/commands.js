@@ -1,18 +1,29 @@
-import LoginPage from './pages/Login'
+import LoginPage from './pages/login.page'
 
-const admin = Cypress.env('admin')
-const user = Cypress.env('user')
+const ensureCredentials = (credentials, role) => {
+  if (!credentials?.email || !credentials?.password) {
+    throw new Error(
+      `Missing ${role} credentials in Cypress environment variables.`,
+    )
+  }
+}
 
-Cypress.Commands.add('loginAsAdmin', () => {
+Cypress.Commands.add('loginWithCredentials', (credentials) => {
+  ensureCredentials(credentials, 'provided')
   LoginPage.open()
-  LoginPage.fillCredentials(admin)
+  LoginPage.fillCredentials(credentials)
   LoginPage.submit()
   LoginPage.expectSuccessfulLogin()
 })
 
+Cypress.Commands.add('loginAsAdmin', () => {
+  const admin = Cypress.env('admin')
+  ensureCredentials(admin, 'admin')
+  cy.loginWithCredentials(admin)
+})
+
 Cypress.Commands.add('loginAsUser', () => {
-  LoginPage.open()
-  LoginPage.fillCredentials(user)
-  LoginPage.submit()
-  LoginPage.expectSuccessfulLogin()
+  const user = Cypress.env('user')
+  ensureCredentials(user, 'user')
+  cy.loginWithCredentials(user)
 })

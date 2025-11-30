@@ -1,5 +1,5 @@
-import BasePage from '../BasePage'
-import { ELEMENTS } from './elements'
+import BasePage from './base.page'
+import { loginSelectors as s } from '../selectors/login'
 
 class LoginPage extends BasePage {
   open() {
@@ -7,15 +7,15 @@ class LoginPage extends BasePage {
   }
 
   typeEmail(email) {
-    this.typeText(ELEMENTS.emailField, email)
+    this.typeText(s.emailInput, email)
   }
 
   typePassword(password) {
-    this.typeText(ELEMENTS.passwordField, password)
+    this.typeText(s.passwordInput, password)
   }
 
   submit() {
-    this.click(ELEMENTS.submitButton)
+    this.click(s.submitButton)
   }
 
   fillCredentials({ email, password }) {
@@ -30,7 +30,11 @@ class LoginPage extends BasePage {
 
   expectSuccessfulLogin() {
     cy.url().should(($url) => {
-      expect($url.includes('/admin') || $url.includes('/dashboard')).to.be.true
+      expect($url).to.satisfy((currentUrl) => {
+        return (
+          currentUrl.includes('/admin') || currentUrl.includes('/dashboard')
+        )
+      })
     })
   }
 }
