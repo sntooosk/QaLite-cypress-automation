@@ -7,7 +7,6 @@ class StorePage extends BasePage {
   constructor() {
     super()
     this.currentStoreName = ''
-    this.currentStoreUrl = ''
   }
 
   fillStoreName(name) {
@@ -21,7 +20,6 @@ class StorePage extends BasePage {
     )
   }
   fillStoreUrl(url) {
-    this.currentStoreUrl = url
     this.typeText(s.storeUrlInput, url)
   }
 
@@ -38,9 +36,6 @@ class StorePage extends BasePage {
   }
   toggleStateFormCategory() {
     this.click(s.FORMSCENARIO.CATEGORY.toggleCategory)
-  }
-  updateCategory() {
-    this.click(s.FORMSCENARIO.CATEGORY.buttonEditCategory).eq(0)
   }
 
   updateStore() {
