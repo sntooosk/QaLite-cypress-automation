@@ -22,7 +22,6 @@
     "testing"
   ],
   "dependencies": {
-    "cypress-xpath": "2.0.1",
     "dotenv-cli": "^7.4.2",
     "faker-br": "^0.5.0"
   },
