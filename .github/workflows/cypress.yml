@@ -16,11 +16,27 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+
       - name: Cypress Desktop
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           command: npm run cy:run:desktop
+
+      - name: Upload Videos (Desktop)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos-desktop
+          path: cypress/videos/
+          retention-days: 7
+
+      - name: Upload Screenshots (Desktop)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screens-desktop
+          path: cypress/screenshots/
 
   cypress-mobile:
     runs-on: ubuntu-latest
@@ -30,8 +46,24 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+
       - name: Cypress Mobile
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           command: npm run cy:run:mobile
+
+      - name: Upload Videos (Mobile)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos-mobile
+          path: cypress/videos/
+          retention-days: 7
+
+      - name: Upload Screenshots (Mobile)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screens-mobile
+          path: cypress/screenshots/

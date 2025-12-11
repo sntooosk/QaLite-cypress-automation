@@ -10,7 +10,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 120000,
   pageLoadTimeout: 180000,
   e2e: {
-    baseUrl: 'https://qa-lite.vercel.app',
+    baseUrl: 'https://qalite-frontend.vercel.app',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx,feature}',
     setupNodeEvents(on) {
       on('file:preprocessor', cucumber())

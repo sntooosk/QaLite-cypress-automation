@@ -1,7 +1,5 @@
 node_modules
-cypress.env.json
-cypress/screenshots
 cypress/cucumber-json
-cypress/videos
-downloads/
 .env
+cypress/videos/
+cypress/screenshots/
